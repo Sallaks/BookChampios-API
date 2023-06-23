@@ -3,6 +3,7 @@ package com.proyecto.Booking.controller;
 import com.proyecto.Booking.entities.Book;
 import com.proyecto.Booking.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +17,8 @@ public class BookController {
     BookService bookService;
 
     @PostMapping
-    public void create(@RequestBody Book book){
-
-        bookService.save(book);
+    public ResponseEntity<Book> create(@RequestBody Book book){
+        return new ResponseEntity<>(bookService.save(book), HttpStatus.CREATED);
     }
 
     @GetMapping
